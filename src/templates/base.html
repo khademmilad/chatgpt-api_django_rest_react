@@ -1,0 +1,28 @@
+<!-- base.html -->
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}My Website{% endblock %}</title>
+    <!-- Add your CSS and other head elements here -->
+</head>
+<body>
+    <header>
+        {% block header %}
+            <!-- Your header content goes here -->
+        {% endblock %}
+    </header>
+
+    <div id="content">
+        {% block content %}
+            <!-- Your main content goes here -->
+        {% endblock %}
+    </div>
+
+    <footer>
+        {% block footer %}
+            <!-- Your footer content goes here -->
+        {% endblock %}
+    </footer>
+</body>
+</html>

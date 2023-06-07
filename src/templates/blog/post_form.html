@@ -1,0 +1,22 @@
+<!-- post_form.html -->
+
+{% extends 'home.html' %}
+{% load static %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+    <h1>Post</h1>
+    <p>Create a Post for your blog using ChatGPT.</p>
+    <form method="post" class="post-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+
+    <h1>Result</h1>
+    <p>{{ completion_message }}</p>
+{% endblock %}
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'blog/post_form.css' %}">
