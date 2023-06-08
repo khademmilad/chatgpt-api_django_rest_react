@@ -1,0 +1,38 @@
+<!-- base.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% load django_bootstrap5 %}
+
+    {# Load Bootstrap CSS and JavaScript #}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    {# Load Bootstrap alerts #}
+    {% bootstrap_messages %}
+    <title>Donate</title>
+<body>
+    <header>
+        {% block header %}
+            <!-- Your header content goes here -->
+        {% endblock %}
+    </header>
+
+    <div id="content">
+        {% block content %}
+            <!-- Your main content goes here -->
+        {% endblock %}
+    </div>
+
+    <footer>
+        {% block footer %}
+            <!-- Your footer content goes here -->
+        {% endblock %}
+    </footer>
+</body>
+</html>
