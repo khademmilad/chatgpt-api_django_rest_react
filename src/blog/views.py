@@ -3,6 +3,9 @@ from .forms import PostForm
 import requests
 import openai
 from django.urls import reverse
+from .models import Post
+from django.contrib.auth.models import User
+from django.http import JsonResponse
 
 
 
@@ -25,20 +28,30 @@ def post_form_view(request):
                 'text': text
             }
 
+            context['title'] = title
+
             # Make a POST request to the ChatGPT API and retrieve completion message
             completion_message = make_chat_completion(data['title'])
+
+
+            # Create a new User instance (assuming you have the user instance available)
+            if completion_message:
+                user = request.user
+                post = Post(title=title, text=completion_message, user=user)
+                post.save()
 
             # Clear form fields
             form = PostForm()
 
-            # Redirect to the content page with the completion message
-            print('message', completion_message)
-
+            # Show the preview
+            user_posts = get_user_posts(user.id)
+            print('user_posts', user_posts)
+            context['user_post'] = user_posts[0]
     else:
         form = PostForm()
     
     context['form'] = form
-    context['completion_message'] = completion_message
+    
 
     return render(request, 'blog/post_form.html', context)
 
@@ -58,3 +71,12 @@ def make_chat_completion(title):
     # Retrieve and return the completion message
     return completion.choices[0].message
 
+
+def get_user_posts(user_id):
+    # Get the User instance based on the user_id
+    user = User.objects.get(id=user_id)
+
+    # Retrieve all posts associated with the user
+    posts = Post.objects.filter(user=user)
+
+    return posts
