@@ -6,7 +6,9 @@ from django.urls import reverse
 from .models import Post
 from django.contrib.auth.models import User
 from django.http import JsonResponse
-from .common import process_option, TextOptions
+from .common import process_option_default
+import json
+
 
 
 openai.api_key = "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"
@@ -37,7 +39,7 @@ def post_form_view(request):
             # Create a new User instance (assuming you have the user instance available)
             if completion_message:
                 user = request.user
-                post = Post(title=title, text=completion_message, user=user)
+                post = Post(title=title, text=completion_message['content'], user=user)
                 post.save()
 
             # Clear form fields
@@ -58,23 +60,10 @@ def post_form_view(request):
 
 
 def make_chat_completion(title, content):
+    
 
-    user_choice = '1'
-
-    result = process_option(title, content)
+    result = process_option_default(title, content)
     print('resultt', result)
-    # Process the selected option
-    if user_choice == '1':
-        selected_option = TextOptions.OPTION_1
-    elif user_choice == '2':
-        selected_option = TextOptions.OPTION_2
-    elif user_choice == '3':
-        selected_option = TextOptions.OPTION_3
-    else:
-        result = "Invalid choice!"
-
-    # Call the process_option function with the selected option
-    result = process_option(selected_option.value.title, selected_option.value.text)
 
     # Make a POST request to the ChatGPT API
     completion = openai.ChatCompletion.create(
