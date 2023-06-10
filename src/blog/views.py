@@ -6,7 +6,7 @@ from django.urls import reverse
 from .models import Post
 from django.contrib.auth.models import User
 from django.http import JsonResponse
-
+from .common import process_option, TextOptions
 
 
 openai.api_key = "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"
@@ -31,7 +31,7 @@ def post_form_view(request):
             context['title'] = title
 
             # Make a POST request to the ChatGPT API and retrieve completion message
-            completion_message = make_chat_completion(data['title'])
+            completion_message = make_chat_completion(data['title'], data['text'])
 
 
             # Create a new User instance (assuming you have the user instance available)
@@ -45,7 +45,7 @@ def post_form_view(request):
 
             # Show the preview
             user_posts = get_user_posts(user.id)
-            print('user_posts', user_posts)
+            
             context['user_post'] = user_posts[0]
     else:
         form = PostForm()
@@ -57,14 +57,32 @@ def post_form_view(request):
 
 
 
-def make_chat_completion(title):
+def make_chat_completion(title, content):
+
+    user_choice = '1'
+
+    result = process_option(title, content)
+    print('resultt', result)
+    # Process the selected option
+    if user_choice == '1':
+        selected_option = TextOptions.OPTION_1
+    elif user_choice == '2':
+        selected_option = TextOptions.OPTION_2
+    elif user_choice == '3':
+        selected_option = TextOptions.OPTION_3
+    else:
+        result = "Invalid choice!"
+
+    # Call the process_option function with the selected option
+    result = process_option(selected_option.value.title, selected_option.value.text)
+
     # Make a POST request to the ChatGPT API
     completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo-0301",
         temperature=0.8,
         max_tokens=2000,
         messages=[
-            {"role": "assistant", "content": title},
+            {"role": "assistant", "content": result},
         ]
     )
 
