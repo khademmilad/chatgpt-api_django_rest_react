@@ -1,5 +1,9 @@
 <!-- signup.html -->
+{% extends 'home.html' %}
 
+{% block title %}Login{% endblock %}
+
+{% block content %}
 <h1>Sign Up</h1>
 
 <form method="POST">
@@ -7,3 +11,4 @@
     {{ form.as_p }}
     <button type="submit">Sign Up</button>
 </form>
+{% endblock %}
