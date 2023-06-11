@@ -34,8 +34,8 @@ def post_list_view(request):
             data = json.loads(text)
 
             # Access the 'content' key and print its value
+
             content = data['content']
-            print('content', content)
 
             # Create a BytesIO buffer to hold the PDF
             buffer = BytesIO()
