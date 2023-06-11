@@ -1,0 +1,44 @@
+<!-- post_form.html -->
+
+{% extends 'home.html' %}
+{% load static %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="white-box">
+                    <h3 class="box-title">History of Posts</h3>
+                    <div class="table-responsive">
+                        <table class="table text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th class="border-top-0">#</th>
+                                    <th class="border-top-0">Title</th>
+                                    <th class="border-top-0">Content</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for post in posts %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ post.title }}</td>
+                                        <td>{{ post.text|truncatewords_html:10 }}</td>
+                                        <td><a href="?download_pdf=1&post_id={{ post.id }}" download="{{ post.id }}.pdf">
+                                            <button>Download PDF</button>
+                                        </a></td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+{% endblock %}
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'blog/post_form.css' %}">
