@@ -9,13 +9,20 @@
 
     <div class="container">
         <div class="row">
-            <h1>Post</h1>
-                <p>Create a Post for your blog using ChatGPT.</p>
-                <form method="post" class="post-form">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit">Submit</button>
-                </form>
+            <h1>Create a Post for your blog using ChatGPT.</h1>
+                <form method="POST">
+                  {% csrf_token %}
+                  <div class="form-group">
+                      <label for="{{ form.title.id_for_label }}">Title:</label>
+                      {{ form.title }}
+                  </div>
+                  <div class="form-group">
+                      <label for="{{ form.text.id_for_label }}">Text:</label>
+                      {{ form.text }}
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+              {% if user_post %}
                 <h1>Result</h1>
                 <div class="container-sm">
                     <p>
@@ -32,6 +39,7 @@
                         </div>   
                       </div>
                 </div>
+              {% endif %}
         </div>
     </div>
     
