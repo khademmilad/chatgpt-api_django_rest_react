@@ -35,7 +35,6 @@ def post_form_view(request):
             # Make a POST request to the ChatGPT API and retrieve completion message
             completion_message = make_chat_completion(data['title'], data['text'])
 
-
             # Create a new User instance (assuming you have the user instance available)
             if completion_message:
                 user = request.user
