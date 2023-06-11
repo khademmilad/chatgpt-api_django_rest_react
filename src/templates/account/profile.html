@@ -27,7 +27,7 @@
                                         <td>{{ post.title }}</td>
                                         <td>{{ post.text|truncatewords_html:10 }}</td>
                                         <td><a href="?download_pdf=1&post_id={{ post.id }}" download="{{ post.id }}.pdf">
-                                            <button class="btn btn-success">Download PDF</button>
+                                            <button class="btn btn-primary">Download PDF</button>
                                         </a><a href="{% url 'account:delete_post' post.id %}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this post?')">Delete</a><a href="{% url 'account:preview_pdf' post.id %}" class="btn btn-primary" target="_blank">Preview PDF</a></td>
                                     </tr>
                                 {% endfor %}
@@ -41,4 +41,3 @@
 {% endblock %}
 
 
-<link rel="stylesheet" type="text/css" href="{% static 'blog/post_form.css' %}">

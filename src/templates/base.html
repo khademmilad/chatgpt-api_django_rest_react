@@ -128,12 +128,13 @@
                     <ul id="sidebarnav">
                         <!-- User Profile-->
                         <li class="sidebar-item pt-2">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="dashboard.html"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#"
                                 aria-expanded="false">
                                 <i class="far fa-clock" aria-hidden="true"></i>
-                                <span class="hide-menu">Dashboard</span>
+                                <span class="hide-menu">Home</span>
                             </a>
                         </li>
+                        {% if user.is_authenticated %}
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'account:profile' user.username %}"
                                 aria-expanded="false">
@@ -141,6 +142,7 @@
                                 <span class="hide-menu">Profile</span>
                             </a>
                         </li>
+                        
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'blog:post_form' %}"
                                 aria-expanded="false">
@@ -148,6 +150,22 @@
                                 <span class="hide-menu">Create Post</span>
                             </a>
                         </li>
+
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'account:logout' %}"
+                                aria-expanded="false">
+                                <i class="fa fa-font" aria-hidden="true"></i>
+                                <span class="hide-menu">Logout</span>
+                            </a>
+                        </li>
+
+                        {% else %}
+                        <li class="text-center p-20 upgrade-btn">
+                            <a href="#"
+                                class="btn d-grid btn-danger text-white" target="_blank">
+                                Hereley</a>
+                        </li>
+                        {% endif %}
                         <li class="text-center p-20 upgrade-btn">
                             <a href="#"
                                 class="btn d-grid btn-danger text-white" target="_blank">

@@ -27,15 +27,15 @@
                 <div class="container-sm">
                     <p>
                         <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                          {{user_post}}
+                          {{ user_post }}
                         </a>
                     </p>
                       <div class="collapse" id="collapseExample">
                         <div class="card card-body">
-                          {{user_post.text}}
+                          {{ user_post.text }}
                           <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <a href="{% url 'account:profile' user.username %}" class="btn btn-success">Manage Posts</a>
-                        </div>
+                          </div>
                         </div>   
                       </div>
                 </div>
@@ -45,5 +45,5 @@
     
 {% endblock %}
 
-
 <link rel="stylesheet" type="text/css" href="{% static 'blog/post_form.css' %}">
+

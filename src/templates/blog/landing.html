@@ -1,0 +1,15 @@
+<!-- landing.html -->
+{% extends 'home.html' %}
+{% load static %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+<h1>Welcome to My Site!</h1>
+<p>Here is some information about the site...</p>
+
+<a href="{% url 'account:signup' %}" class="btn btn-primary">Sign Up to Add a Post</a>
+
+<a class="btn btn-primary" href="{% url 'account:login' %}">Login</a>
+
+{% endblock %}

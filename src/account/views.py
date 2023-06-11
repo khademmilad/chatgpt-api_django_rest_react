@@ -7,8 +7,13 @@ from io import BytesIO
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.platypus import SimpleDocTemplate, Paragraph
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
 
 
+
+@login_required
 def profile(request, username):
     user = get_object_or_404(User, username=username)
     posts = Post.objects.filter(user=user).order_by('-created_at')[:5]  # Get the last 5 posts
@@ -86,3 +91,15 @@ def preview_pdf(request, post_id):
     response['Content-Disposition'] = f'inline; filename="{post_id}.pdf"'
 
     return response
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)  # Automatically log in the user after sign-up
+            return redirect('account:profile', username=request.user.username)  # Redirect to the dashboard or any other page
+    else:
+        form = UserCreationForm()
+    return render(request, 'account/signup.html', {'form': form})
