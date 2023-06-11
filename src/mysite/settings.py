@@ -32,7 +32,6 @@ INSTALLED_APPS = [
     'account',
     'blog',
     'requests',
-    'pdf'
 ]
 
 MIDDLEWARE = [

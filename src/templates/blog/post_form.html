@@ -34,8 +34,8 @@
                         <div class="card card-body">
                           {{user_post.text}}
                           <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <button type="button" class="btn btn-success">Download</button>
-                          </div>
+                            <a href="{% url 'account:profile' user.username %}" class="btn btn-success">Manage Posts</a>
+                        </div>
                         </div>   
                       </div>
                 </div>

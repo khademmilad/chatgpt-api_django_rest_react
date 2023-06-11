@@ -1,9 +1,12 @@
 from django.urls import path
-from .views import profile
+from account import views
 
 app_name = 'account'
 
 urlpatterns = [
-    # Other URL patterns
-    path('profile/<str:username>/', profile, name='profile'),
+    path('profile/<str:username>/', views.profile, name='profile'),
+    path('delete-post/<int:post_id>/', views.delete_post, name='delete_post'),
+    path('preview-pdf/<int:post_id>/', views.preview_pdf, name='preview_pdf'),
+
+
 ]
