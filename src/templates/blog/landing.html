@@ -8,6 +8,15 @@
 <h1>Welcome to My Site!</h1>
 <p>Here is some information about the site...</p>
 
+<div class="image-container">
+    <h1 style="color: red;">Image 1</h1>
+    <img style="width: 400px; height: 250px;" src="{% static 'images/landing/1.png' %}" alt="Image 1">
+    <h1 style="color: red;">Image 2</h1>
+    <img style="width: 400px; height: 250px;" src="{% static 'images/landing/2.png' %}" alt="Image 2">
+    <h1 style="color: red;">Image 3</h1>
+    <img style="width: 400px; height: 250px;" src="{% static 'images/landing/3.png' %}" alt="Image 3">
+</div>
+
 <a href="{% url 'account:signup' %}" class="btn btn-primary">Sign Up to Add a Post</a>
 
 <a class="btn btn-primary" href="{% url 'account:login' %}">Login</a>

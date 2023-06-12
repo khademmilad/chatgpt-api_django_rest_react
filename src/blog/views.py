@@ -11,6 +11,7 @@ import json
 from django.shortcuts import redirect
 
 
+
 openai.api_key = "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"
 
 
