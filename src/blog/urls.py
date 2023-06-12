@@ -1,6 +1,10 @@
 from django.urls import path
-from .views import post_form_view
+from . import views
+
+app_name = 'blog'
 
 urlpatterns = [
-    path('', post_form_view, name='post_form'),
+    path('', views.landing, name='landing'),
+    path('create-post/', views.post_form_view, name='post_form'),
+    
 ]

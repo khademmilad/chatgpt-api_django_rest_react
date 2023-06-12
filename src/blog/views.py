@@ -8,12 +8,17 @@ from django.contrib.auth.models import User
 from django.http import JsonResponse
 from .common import process_option_default
 import json
+from django.shortcuts import redirect
 
 
 
 openai.api_key = "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"
 
-from django.shortcuts import redirect
+
+def landing(request):
+    return render(request, 'blog/landing.html')
+
+
 
 def post_form_view(request):
     context = {}

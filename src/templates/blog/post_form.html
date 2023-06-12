@@ -3,39 +3,47 @@
 {% extends 'home.html' %}
 {% load static %}
 
-{% block title %}About Us{% endblock %}
+{% block title %}Create a Post{% endblock %}
 
 {% block content %}
 
     <div class="container">
         <div class="row">
-            <h1>Post</h1>
-                <p>Create a Post for your blog using ChatGPT.</p>
-                <form method="post" class="post-form">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit">Submit</button>
-                </form>
+            <h1>Create a Post for your blog using ChatGPT.</h1>
+                <form method="POST">
+                  {% csrf_token %}
+                  <div class="form-group">
+                      <label for="{{ form.title.id_for_label }}">Title:</label>
+                      {{ form.title }}
+                  </div>
+                  <div class="form-group">
+                      <label for="{{ form.text.id_for_label }}">Text:</label>
+                      {{ form.text }}
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+              {% if user_post %}
                 <h1>Result</h1>
                 <div class="container-sm">
                     <p>
                         <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                          {{user_post}}
+                          {{ user_post }}
                         </a>
                     </p>
                       <div class="collapse" id="collapseExample">
                         <div class="card card-body">
-                          {{user_post.text}}
+                          {{ user_post.text }}
                           <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <button type="button" class="btn btn-success">Download</button>
+                            <a href="{% url 'account:profile' user.username %}" class="btn btn-success">Manage Posts</a>
                           </div>
                         </div>   
                       </div>
                 </div>
+              {% endif %}
         </div>
     </div>
     
 {% endblock %}
 
-
 <link rel="stylesheet" type="text/css" href="{% static 'blog/post_form.css' %}">
+
