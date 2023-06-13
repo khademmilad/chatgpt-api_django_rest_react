@@ -1,11 +1,11 @@
 import React from 'react';
-import Form from './Form';
+import CreateForm from './CreateForm'
 
 function App() {
   return (
     <div>
       <h1>My Form</h1>
-      <Form />
+      <CreateForm />
     </div>
   );
 }
