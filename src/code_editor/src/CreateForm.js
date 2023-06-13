@@ -1,48 +1,53 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useState } from 'react';
+import axios from 'axios';
 
-function Form() {
-  const { register, handleSubmit } = useForm();
+const PostForm = () => {
+  const [title, setTitle] = useState('');
+  const [text, setText] = useState('');
 
-  const onSubmit = async (data) => {
-    // Send the form data to your Django backend
-    const response = await fetch('/api/save-form', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    if (response.ok) {
-      console.log('Form submitted successfully!');
-      // Perform any desired actions after successful form submission
-    } else {
-      console.error('Form submission failed.');
-      // Handle form submission failure
-    }
+    const data = {
+      title: title,
+      text: text,
+    };
+
+    axios.post('http://your-django-backend-url/posts/', data)
+      .then((response) => {
+        console.log(response.data); // handle success response
+      })
+      .catch((error) => {
+        console.error(error); // handle error
+      });
+
+    // Reset form inputs
+    setTitle('');
+    setText('');
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit}>
       <div>
-        <label>Name</label>
-        <input type="text" {...register('name', { required: true })} />
+        <label htmlFor="title">Title:</label>
+        <input
+          type="text"
+          id="title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
       </div>
-
       <div>
-        <label>Email</label>
-        <input type="email" {...register('email', { required: true })} />
+        <label htmlFor="text">Text:</label>
+        <textarea
+          id="text"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+        />
       </div>
-
-      <div>
-        <label>Message</label>
-        <textarea {...register('message', { required: true })} />
-      </div>
-
       <button type="submit">Submit</button>
     </form>
   );
-}
+};
 
-export default Form;
+export default PostForm;
