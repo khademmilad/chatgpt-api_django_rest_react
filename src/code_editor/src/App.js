@@ -1,11 +1,10 @@
 import React from 'react';
-import CreateForm from './CreateForm'
+import ProfilePage from './ProfilePage';
 
 function App() {
   return (
-    <div>
-      <h1>My Form</h1>
-      <CreateForm />
+    <div className="App">
+      <ProfilePage />
     </div>
   );
 }

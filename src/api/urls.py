@@ -1,7 +1,7 @@
+# urls.py
 from django.urls import path
-from .views import save_form_data
+from . import views
 
 urlpatterns = [
-    path("save-form/", save_form_data, name="save_form_data"),
-    # Add more FastAPI URL patterns if needed
+    path('posts/user/<int:user_id>/', views.UserPostListAPIView.as_view(), name='user-post-list'),
 ]
