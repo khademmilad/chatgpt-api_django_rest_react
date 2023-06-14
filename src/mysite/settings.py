@@ -88,6 +88,9 @@ DATABASES = {
     }
 }
 
+# Allow requests from all origins (change it as needed for production)
+CORS_ORIGIN_ALLOW_ALL = True
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
