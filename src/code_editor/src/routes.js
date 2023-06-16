@@ -16,6 +16,7 @@ export const Routes = {
     Lock: { path: "/examples/lock" },
     NotFound: { path: "/examples/404" },
     ServerError: { path: "/examples/500" },
+    // Post: {path: "dashboard/post"},
 
     // docs
     DocsOverview: { path: "/documentation/overview" },
