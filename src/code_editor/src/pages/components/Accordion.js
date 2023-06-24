@@ -1,39 +1,34 @@
-import React, { useState, useEffect } from 'react';
-import { Row, Col, Container } from '@themesberg/react-bootstrap';
-import AccordionComponent from "../../components/AccordionComponent";
-import Documentation from "../../components/Documentation";
+import React, { useState } from 'react';
+import { Accordion, Card, Button } from 'react-bootstrap';
 
-export default () => {
-  const [accordionData, setAccordionData] = useState([]);
+const AccordionComponent = ({ defaultKey, data }) => {
+  const [activeKey, setActiveKey] = useState(defaultKey);
 
-  useEffect(() => {
-    fetchAccordionData();
-  }, []);
-
-  const fetchAccordionData = async () => {
-    try {
-      const response = await fetch('http://127.0.0.1:8000/api/posts/user/1/');
-      const data = await response.json();
-      setAccordionData(data);
-    } catch (error) {
-      console.log('Error fetching accordion data:', error);
-    }
+  const toggleAccordion = (eventKey) => {
+    setActiveKey(eventKey === activeKey ? null : eventKey);
   };
 
   return (
-    <article>
-      <Container className="px-0">
-        <Row className="d-flex flex-wrap flex-md-nowrap align-items-center py-4">
-          <Col className="d-block mb-4 mb-md-0">
-            <h1 className="h2">Accordions</h1>
-            <p className="mb-0">
-              Use the accordion elements to segment content and show/hide when clicking on tabs.
-            </p>
-          </Col>
-        </Row>
-
-        <AccordionComponent defaultKey="panel-1" data={accordionData} />
-      </Container>
-    </article>
+    <Accordion activeKey={activeKey}>
+      {data.map((item) => (
+        <Card key={item.id}>
+          <Card.Header>
+            <Accordion.Toggle
+              as={Button}
+              variant="link"
+              eventKey={item.eventKey}
+              onClick={() => toggleAccordion(item.eventKey)}
+            >
+              {item.title}
+            </Accordion.Toggle>
+          </Card.Header>
+          <Accordion.Collapse eventKey={item.eventKey}>
+            <Card.Body>{item.description}</Card.Body>
+          </Accordion.Collapse>
+        </Card>
+      ))}
+    </Accordion>
   );
 };
+
+export default AccordionComponent;
