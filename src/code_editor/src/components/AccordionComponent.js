@@ -5,7 +5,7 @@ export default (props) => {
   const { defaultKey, data = [], className = "" } = props;
 
   const AccordionItem = (item) => {
-    const { eventKey, title, description } = item;
+    const { eventKey, title, text } = item;
 
     return (
       <Accordion.Item eventKey={eventKey}>
@@ -17,7 +17,7 @@ export default (props) => {
         <Accordion.Body>
           <Card.Body className="py-2 px-0">
             <Card.Text className="mb-0">
-              {description}
+              {text}
             </Card.Text>
           </Card.Body>
         </Accordion.Body>
