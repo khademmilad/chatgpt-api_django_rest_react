@@ -1,9 +1,13 @@
-import Image from 'next/image'
+import Link from "next/link";
+import Navbar from './components/Navbar'
 
-export default function Home() {
+const Home: React.FC = () => {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1>Home Page</h1>
-    </main>
-  )
-}
+    <div>
+      <Navbar />
+      {/* Rest of your page content */}
+    </div>
+  );
+};
+
+export default Home;
