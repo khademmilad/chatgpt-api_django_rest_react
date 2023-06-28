@@ -1,17 +1,16 @@
 import React from 'react';
 
-interface ProfileProps {
-  name: string;
-  age: number;
+
+
+type Props = {
+    name: string;
+    age: number;}
+
+const Profile = (props: Props) => {
+    const {age,name} = props
+  return (
+    <div className='flex flex-row mx-auto w-full text-3xl text-center items-center'>My name is {name}</div>
+  )
 }
 
-const Profile: React.FC<ProfileProps> = ({ name, age }) => {
-  return (
-    <div>
-      <h1>{name}</h1>
-      <p>Age: {age}</p>
-    </div>
-  );
-};
-
-export default Profile;
+export default Profile
